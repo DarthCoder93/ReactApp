@@ -1,19 +1,28 @@
 import React from 'react'
-import { Route, Link } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import Home from '../home'
+import Cart from '../cart'
+import Products from '../products'
+import ProductDetails from '../productDetails'
+import SignIn from '../signIn'
 import About from '../about'
+
+
+
+import Header from '../../components/header';
 
 const App = () => (
   <div>
-    <header>
-      <Link to="/">Home</Link>
-      <Link to="/about-us">About</Link>
-    </header>
+    <Header />
 
-    <main>
+    <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/about-us" component={About} />
-    </main>
+      <Route path="/authenticate" component={SignIn} />
+      <Route path="/cart" component={Cart} />
+      <Route path="/products" component={Products} />
+      <Route path="/brands" component={ProductDetails} />
+    </Switch>
   </div>
 )
 

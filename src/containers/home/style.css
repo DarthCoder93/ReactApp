@@ -1,0 +1,12 @@
+.featured {
+    margin-top: 10;
+}
+
+.cardFooter {
+   height: 70;
+}
+
+.cardButton {
+    margin: 5px;
+    color: rgb(119, 119, 119)
+}

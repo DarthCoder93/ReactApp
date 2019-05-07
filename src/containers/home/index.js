@@ -1,60 +1,28 @@
-import React from 'react'
-import { push } from 'connected-react-router'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import {
-  increment,
-  incrementAsync,
-  decrement,
-  decrementAsync
-} from '../../modules/counter'
+import React from 'react';
+import BestSellersSection from './BestSellersSection';
+import MostPopulerSection from './MostPopulerSection';
+import BrandsGridSection from './BrandsGridSection';
 
-const Home = props => (
-  <div>
-    <h1>Home</h1>
-    <p>Count: {props.count}</p>
+import './style.css'
 
-    <p>
-      <button onClick={props.increment}>Increment</button>
-      <button onClick={props.incrementAsync} disabled={props.isIncrementing}>
-        Increment Async
-      </button>
-    </p>
+export function HomePage() {
 
-    <p>
-      <button onClick={props.decrement}>Decrement</button>
-      <button onClick={props.decrementAsync} disabled={props.isDecrementing}>
-        Decrement Async
-      </button>
-    </p>
+  return (
+    <article>
+      <div className="container">
 
-    <p>
-      <button onClick={() => props.changePage()}>
-        Go to about page via redux
-      </button>
-    </p>
-  </div>
-)
+        <div className="row featured"> 
 
-const mapStateToProps = ({ counter }) => ({
-  count: counter.count,
-  isIncrementing: counter.isIncrementing,
-  isDecrementing: counter.isDecrementing
-})
+        <BestSellersSection />
 
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(
-    {
-      increment,
-      incrementAsync,
-      decrement,
-      decrementAsync,
-      changePage: () => push('/about-us')
-    },
-    dispatch
-  )
+        <MostPopulerSection />
+        
+        <BrandsGridSection />
+        </div>
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home)
+      </div>
+    </article>
+  );
+}
+
+export default HomePage

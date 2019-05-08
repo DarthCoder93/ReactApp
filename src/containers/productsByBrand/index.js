@@ -6,7 +6,7 @@ import { SERVER_URL } from '../../constants'
 import store from '../../store'
 import {ADD_TO_CART} from '../../reducers/cart'
 
-class Products extends React.Component {
+class ProductByBrand extends React.Component {
   constructor(props) {
     super(props);
 
@@ -29,7 +29,7 @@ addToCart(product) {
   }
 
   getDataFromApi = () => {
-    var url = SERVER_URL + "products/byBrands"
+    var url = SERVER_URL + "products"
     let self = this
     axios.get(url)
       .then(function (response) {
@@ -70,4 +70,4 @@ addToCart(product) {
 
 }
 
-export default Products
+export default ProductByBrand

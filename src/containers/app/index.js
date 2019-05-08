@@ -4,6 +4,7 @@ import Home from '../home'
 import Cart from '../cart'
 import Products from '../products'
 import ProductDetails from '../productDetails'
+import Brand from '../brands'
 import SignIn from '../signIn'
 import About from '../about'
 
@@ -21,7 +22,8 @@ const App = () => (
       <Route path="/authenticate" component={SignIn} />
       <Route path="/cart" component={Cart} />
       <Route path="/products" component={Products} />
-      <Route path="/brands" component={ProductDetails} />
+      <Route path="/brands" component={Brand } />
+      <Route path="/singleProduct" component={ProductDetails} />
     </Switch>
   </div>
 )

@@ -22,7 +22,7 @@ class SignInForm extends Component {
 
           history.push('/')
 
-          store.dispatch()
+          store.dispatch({type: AUTH_STATE_CHANGED , isSignedIn: true})
 
         }).catch(function(error) {
           // Handle Errors here.

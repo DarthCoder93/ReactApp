@@ -7,7 +7,29 @@ import CartIcon from '@material-ui/icons/ShoppingCart';
 import User from './User'
 import { Link } from "react-router-dom";
 
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import { withStyles } from '@material-ui/core/styles';
+
+
 import './style.css'
+
+const styles = {
+  root: {
+    flexGrow: 1,
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+};
 
 class Header extends Component {
 
@@ -18,11 +40,11 @@ class Header extends Component {
     <div >
       <div className="topNav">
 
-        <Navbar expand="lg" sticky='top' bg="topNav">
+        <Navbar expand="lg" bg="topNav">
           <div className="container">
-            <div className="col-md-2 topNav">
-              <Link to="/">
-                MobiileLab
+            <div className="col-md-2 ">
+              <Link to="/" style={{color:"#fff"}}>
+                The walking
             </Link>
               <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
@@ -39,11 +61,11 @@ class Header extends Component {
             </div>
 
             <User isSignedIn={this.props.isSignedIn} />
-            <div className="col-md-1">
+            <div className="col-md-2">
               <a>
                 <Badge badgeContent={this.props.cartItems.length} color="primary">
                   <Link to="/cart" >
-                    <CartIcon style={{ fontSize: 25 }} className="cartIcon" />
+                    <CartIcon style={{ fontSize: 25, color:"#fff" }} className="cartIcon" />
                   </Link>
                 </Badge>
               </a>
@@ -58,7 +80,7 @@ class Header extends Component {
 
 const mapStateToProps = function(state) {
   return {
-    isSignedIn: state.global.isSignedIn,
+    isSignedIn: state.global.signedIn,
     cartItems: state.cart.cartItems
   }
 }

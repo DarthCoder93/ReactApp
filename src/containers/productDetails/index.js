@@ -1,14 +1,67 @@
 import React from 'react';
-import { MDBContainer, MDBView, MDBCol, MDBRow, MDBMask, MDBCard, MDBBtn, MDBIcon } from "mdbreact";
+import axios from 'axios'
+import { MDBContainer, MDBView, MDBCol, MDBRow, MDBMask, MDBCard, MDBBtn, MDBIcon, MDBBadge } from "mdbreact";
+import queryString from 'query-string'
+import { SERVER_URL } from '../../constants'
+import SimilerPproductsSection from './similerProductsSection'
+import store from '../../store'
+import {ADD_TO_CART} from '../../reducers/cart'
 
 class ProductDetailsPage extends React.Component {
     constructor(props) {
         super(props);
+
+        this.state = {
+            product: {}
+        }
+
+        this.addToCart = this.addToCart.bind(this);
     }
 
+    componentDidMount() {
+        const urlParms = queryString.parse(this.props.location.search);
+        console.log(urlParms);
+        this.getDataFromApi(urlParms.id)
+    }
 
+    getDataFromApi = (productId) => {
+        var url = SERVER_URL + "products/" + productId
+        let self = this
+        axios.get(url)
+            .then(function (response) {
+                // handle success
+                console.log(response);
+
+                var product = response.data
+
+                var desc = product.description.replace("\n", "<br/>");
+
+                product.description = desc
+                self.setState({ product: response.data })
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+
+    addToCart(product) {
+        console.log('Click happened', product.name);
+        store.dispatch({type: ADD_TO_CART , cartItem: product})
+      }
+      
 
     render() {
+
+        const SimilerProducts = () => {
+            console.log("Similer Prodiucts id :" ,this.state.product._id)
+            if (this.state.product._id){
+                return <SimilerPproductsSection productId={this.state.product._id}/>
+            } else {
+                return <div
+                ></div>
+            }
+        }
+
         return (
 
             <MDBContainer>
@@ -18,7 +71,7 @@ class ProductDetailsPage extends React.Component {
 
                             <MDBView hover zoom >
                                 <img
-                                    src="https://mdbootstrap.com/img/Others/documentation/img%20(131)-mini.jpg"
+                                    src={this.state.product.imgUrl}
                                     className="img-fluid"
                                     style={{ width: 400, height: 500 }}
                                     alt=""
@@ -32,15 +85,16 @@ class ProductDetailsPage extends React.Component {
                         <MDBCol size="8  " lg="8" md="6" sm="12" style={{ marginTop: 20 }}>
 
                             <MDBRow>
-                                <h3>Product Name</h3>
-
-                                <p>it is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here,</p>
-
-                                <label>RS. 600 </label>
-
+                                <h3 style={{ fontWeight: "bold", fontSize: 28 }}>{this.state.product.name}</h3>
                             </MDBRow>
                             <MDBRow>
-                                <MDBBtn color="primary" style={{ width: 300 }}>
+                                <MDBContainer>
+                                    <label style={{ fontWeight: "bold", fontSize: 18, marginTop: 15 }} >RS. {this.state.product.price} </label>
+                                </MDBContainer>
+                                <MDBContainer><MDBBadge color="danger">{this.state.product.discount}% Discount</MDBBadge></MDBContainer>
+                            </MDBRow>
+                            <MDBRow>
+                                <MDBBtn onClick={() => this.addToCart(this.props.product)} color="primary" style={{ width: 300, marginTop: 70 }}>
                                     <MDBIcon icon="shopping-cart" className="mr-1" /> Add To Cart
                             </MDBBtn>
                             </MDBRow>
@@ -48,12 +102,20 @@ class ProductDetailsPage extends React.Component {
                     </MDBRow>
                 </MDBCard>
 
-                <MDBCard style={{ marginTop: 20, marginBottom:20 }}>
+                <MDBCard style={{ marginTop: 20, marginBottom: 20 }}>
                     <MDBRow style={{ margin: 20 }}>
-                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.</p>
-
+                        <MDBContainer>
+                            <h5>{this.state.product.description}</h5>
+                        </MDBContainer>
                     </MDBRow>
                 </MDBCard>
+
+
+                <MDBCard style={{ marginTop: 20, marginBottom: 20 }}>
+                 
+                    <SimilerProducts />
+                </MDBCard>
+
             </MDBContainer>
         );
     }

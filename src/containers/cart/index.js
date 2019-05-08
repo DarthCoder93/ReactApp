@@ -1,13 +1,20 @@
 import React, { Component } from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBTooltip, MDBTable, MDBTableBody, MDBTableHead, MDBInput, MDBBtn, MDBIcon } from "mdbreact";
 import { connect } from 'react-redux';
-
+import store from '../../store'
+import {CHNAGE_CART_ITEM_QTY} from '../../reducers/cart'
+import Products from "../products";
 
 class CartPage extends Component {
+    constructor(props) {
+        super(props);
+        this.onQtyChange = this.onQtyChange.bind(this);
+        this.onRemoveItem = this.onRemoveItem.bind(this);
+    }
+
+
     state = {
-        data: [
-            
-        ],
+        cartItems: [],
         columns: [
             {
                 label: '',
@@ -16,10 +23,6 @@ class CartPage extends Component {
             {
                 label: <strong>Product</strong>,
                 field: 'product'
-            },
-            {
-                label: <strong>Color</strong>,
-                field: 'color'
             },
             {
                 label: <strong>Price</strong>,
@@ -40,6 +43,19 @@ class CartPage extends Component {
         ]
     }
 
+    onQtyChange(product, e) {
+        console.log('Click happened', e.target.value);
+
+
+        store.dispatch({type: CHNAGE_CART_ITEM_QTY , prductID: product._id, qty: e.target.value})
+
+        //store.dispatch({type: ADD_TO_CART , cartItem: product})
+      }
+
+      onRemoveItem(product) {
+
+      }
+
     render() {
 
         const rows = [];
@@ -51,13 +67,12 @@ class CartPage extends Component {
                     'img': <img src={row.imgUrl} alt="" style={{ width: 100, height: 100 }} className="img-fluid z-depth-0" />,
                     'product': [<h5 className="mt-3" key={new Date().getDate + 1}><strong>{row.name}</strong></h5>, <p key={new
                         Date().getDate} className="text-muted">{row.subTitle}</p>],
-                    'color': row.color,
                     'price': `$${row.price}`,
                     'qty':
-                        <MDBInput type="number" default={row.qty} className="form-control" style={{ width: "100px" }} />,
+                        <MDBInput onChange={(e) => this.onQtyChange(row, e)} type="number" value={row.qty} default={1} className="form-control" style={{ width: "100px" }} />,
                     'amount': <strong>${row.qty * row.price}</strong>,
                     'button':
-                        <MDBBtn color="primary">
+                        <MDBBtn ONclICK color="primary">
                             X
       </MDBBtn>
                 }
@@ -78,13 +93,13 @@ class CartPage extends Component {
                         </MDBCard>
 
                     </MDBRow>
-                    <MDBRow>
-                        <MDBCard className="w-100">
-                            <MDBCol lg="6" md="6">
+                    <MDBRow style={{marginBottom:40}}>
+                        <MDBCard className="w-100" style={{marginBottom:40}}>
+                            <MDBCol lg="6" md="6" >
                                 <h3>Total 2600</h3>
                             </MDBCol >
                             <MDBCol lg="6" md="6">
-                                <MDBBtn color="primary" rounded>Primary</MDBBtn>
+                                <MDBBtn color="primary" rounded>Purchase</MDBBtn>
                             </MDBCol>
                         </MDBCard>
                     </MDBRow>
@@ -95,10 +110,10 @@ class CartPage extends Component {
     }
 }
 
-const mapStateToProps = function(state) {
+const mapStateToProps = function (state) {
     return {
-      data: state.cart.cartItems
+        data: state.cart.cartItems
     }
-  }
+}
 
 export default connect(mapStateToProps)(CartPage);

@@ -80,7 +80,7 @@ class SignInForm extends Component {
       return
     }
 
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function (error) {
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function (error) {
       var errorMessage = error.message;
 
       this.setState({

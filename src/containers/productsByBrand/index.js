@@ -29,7 +29,7 @@ addToCart(product) {
   }
 
   getDataFromApi = () => {
-    var url = SERVER_URL + "products"
+    var url = SERVER_URL + "products/byBrands/" + this.props.brandId
     let self = this
     axios.get(url)
       .then(function (response) {

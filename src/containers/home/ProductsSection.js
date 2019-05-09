@@ -6,7 +6,7 @@ import { SERVER_URL } from '../../constants'
 import store from '../../store'
 import {ADD_TO_CART} from '../../reducers/cart'
 
-class BestSellersSection extends Component {
+class ProductsSection extends Component {
 
   constructor(props) {
     super(props);
@@ -50,10 +50,6 @@ class BestSellersSection extends Component {
   render() {
     return (
       <section className="text-center my-5">
-        <h2 className="h1-responsive font-weight-bold text-center my-5">
-          Our bestsellers
-      </h2>
-
       <MDBRow>
                 {this.state.products.map((product, index) => {
                      return <MDBCol 
@@ -73,4 +69,4 @@ class BestSellersSection extends Component {
 
 
 
-export default BestSellersSection;
+export default ProductsSection;

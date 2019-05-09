@@ -2,7 +2,8 @@ export const AUTH_STATE_CHANGED = 'globel/AUTH_STATE_CHANGED'
 
 
 const initialState = {
-  signedIn: false
+  signedIn: false,
+  uid: ""
 }
 
 export default (state = initialState, action) => {
@@ -10,7 +11,8 @@ export default (state = initialState, action) => {
     case AUTH_STATE_CHANGED:
       return {
         ...state,
-        signedIn: action.isSignedIn
+        signedIn: action.isSignedIn,
+        uid: action.uid
       }
 
     default:

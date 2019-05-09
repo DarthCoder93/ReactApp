@@ -52,9 +52,9 @@ class Header extends Component {
             <div className="col-md-7">
               <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="mr-auto">
-                <Link to="/">Home</Link>
-                <Link to="/products">Products</Link>
-                <Link to="/brands">Brands</Link>
+                <Link to="/" style={{color:"#fff", marginRight:20}}>Home</Link>
+                <Link to="/products" style={{color:"#fff", marginRight:20}}>Products</Link>
+                <Link to="/brands" style={{color:"#fff", marginRight:20}}>Brands</Link>
                 </Nav>
 
               </Navbar.Collapse>

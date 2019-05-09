@@ -47,7 +47,7 @@ class ProductDetailsPage extends React.Component {
         return (
             <MDBContainer>
                 <h2 className="h1-responsive font-weight-bold text-center my-5">
-                    Fratured Brands
+                    Brands
       </h2>
                 <div className="">
                     <BrandsSection />

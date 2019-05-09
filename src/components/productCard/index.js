@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { MDBCard, MDBCardBody, MDBCardImage, MDBCardTitle, MDBCardText, MDBIcon } from
+import { MDBCard, MDBCardBody, MDBCardImage, MDBContainer, MDBBadge, MDBCardTitle, MDBCardText, MDBIcon } from
   "mdbreact";
 import store, { history } from '../../store'
 import { ADD_TO_CART } from '../../reducers/cart'
@@ -26,15 +26,15 @@ class CardComponent extends Component {
 
   render() {
     return (
-      <MDBCard  className="m-2" style={{ width: "22rem" }} cascade ecommerce wide>
-        <MDBCardImage onClick={() => this.onProductClick(this.props.product)}  cascade top src={this.props.product.imgUrl}
+      <MDBCard className="m-2" style={{ width: "22rem" }} cascade ecommerce wide>
+        <MDBCardImage onClick={() => this.onProductClick(this.props.product)} cascade top src={this.props.product.imgUrl}
           waves />
         <MDBCardBody cascade className="text-center">
           <MDBCardTitle tag="h5">
             Shoes
         </MDBCardTitle>
           <MDBCardTitle onClick={() => this.onProductClick(this.props.product
-            )}>
+          )}>
             <a ><strong>{this.props.product.name}</strong></a>
           </MDBCardTitle>
           <MDBCardText>
@@ -42,6 +42,9 @@ class CardComponent extends Component {
           </MDBCardText>
 
           <span className="float-left">Rs. {this.props.product.price}</span>
+          <MDBContainer>
+            <MDBBadge color="danger">{this.props.product.discount}% Discount</MDBBadge>
+          </MDBContainer>
           <span className="float-right">
             {/* <MDBTooltip placement="top" componentClass="fa fa-shopping-cart mr-3" tag="a" component="i" tooltipContent="Add to Cart" />
             <MDBTooltip placement="top" componentClass="fa fa-share-alt mr-3" tag="a" component="i" tooltipContent="Share" />

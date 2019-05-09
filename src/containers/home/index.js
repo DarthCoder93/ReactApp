@@ -1,7 +1,6 @@
 import React from 'react';
-import BestSellersSection from './BestSellersSection';
-import MostPopulerSection from './MostPopulerSection';
-import BrandsGridSection from './BrandsGridSection';
+import ProductsSection from './ProductsSection';
+
 
 import './style.css'
 
@@ -13,11 +12,8 @@ export function HomePage() {
 
         <div className="row featured"> 
 
-        <BestSellersSection />
+        <ProductsSection />
 
-        <MostPopulerSection />
-        
-        <BrandsGridSection />
         </div>
 
       </div>

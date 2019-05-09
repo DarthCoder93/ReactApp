@@ -94,7 +94,7 @@ class ProductDetailsPage extends React.Component {
                                 <MDBContainer><MDBBadge color="danger">{this.state.product.discount}% Discount</MDBBadge></MDBContainer>
                             </MDBRow>
                             <MDBRow>
-                                <MDBBtn onClick={() => this.addToCart(this.props.product)} color="primary" style={{ width: 300, marginTop: 70 }}>
+                                <MDBBtn onClick={() => this.addToCart(this.state.product)} color="primary" style={{ width: 300, marginTop: 70 }}>
                                     <MDBIcon icon="shopping-cart" className="mr-1" /> Add To Cart
                             </MDBBtn>
                             </MDBRow>

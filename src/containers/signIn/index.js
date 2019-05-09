@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import SignInSection from './SignInForm';
 import SignUpSection from './SignUpForm';
+import firebase from 'firebase'
+import store, { history } from '../../store'
+import { AUTH_STATE_CHANGED } from '../../reducers/global'
 
-
-class FlippingCardPage extends Component {
-
+class SignInPage extends Component {
   render() {
     return (
       <div >
@@ -23,4 +24,4 @@ class FlippingCardPage extends Component {
   }
 }
 
-export default FlippingCardPage;
+export default SignInPage;

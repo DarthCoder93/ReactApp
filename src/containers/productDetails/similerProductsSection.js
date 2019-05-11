@@ -42,9 +42,6 @@ class BestSellersSection extends Component {
         // handle error
         console.log(error);
       })
-      .then(function () {
-        // always executed
-      });
   }
 
   render() {
